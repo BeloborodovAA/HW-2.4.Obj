@@ -15,8 +15,8 @@ public class MoneyTransferTest {
     void setUp() {
         open("http://localhost:9999");
         var loginPage = new LoginPage();
-        loginPage.validLogin(DataHelper.getLogin(), DataHelper.getPassword());
-        loginPage.validVerify(DataHelper.getVerificationCode());
+        var verificationPage = loginPage.validLogin(DataHelper.getLogin(), DataHelper.getPassword());
+        verificationPage.validVerify(DataHelper.getVerificationCode());
     }
 
     @Test
@@ -30,7 +30,7 @@ public class MoneyTransferTest {
 
         var transferPage = dashboardPage.selectCardToTopUp(DataHelper.getSecondCardId());
 
-        dashboardPage = transferPage.transfer(DataHelper.getFirstCardNumber(), amount);
+        dashboardPage = transferPage.transfer(amount);
 
         int balanceFirstAfter = dashboardPage.getCardBalance(DataHelper.getFirstCardId());
         int balanceSecondAfter = dashboardPage.getCardBalance(DataHelper.getSecondCardId());
